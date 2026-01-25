@@ -1,0 +1,33 @@
+[
+{
+    "model": "lms.сourse",
+    "pk": 2,
+    "fields": {
+        "title": "Python программист",
+        "preview": "",
+        "description": "Очень интересная профессия"
+    }
+},
+{
+    "model": "lms.lesson",
+    "pk": 2,
+    "fields": {
+        "title": "Права доступа",
+        "description": "Разграничене прав доступа это важно",
+        "preview": "",
+        "video_url": null,
+        "сourse": 2
+    }
+},
+{
+    "model": "lms.lesson",
+    "pk": 3,
+    "fields": {
+        "title": "Кеширование",
+        "description": "Серверное кеширование и клиентское кеширование",
+        "preview": "",
+        "video_url": null,
+        "сourse": 2
+    }
+}
+]
