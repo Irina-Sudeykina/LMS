@@ -18,7 +18,46 @@
 
 ## Использование:
 
+### Модель User: ###
+Модель представляет пользователя платформы, и имеет следующие свойства:<br>
+email - Аватар,<br>
+phone - Телефон,<br>
+sity - Город<br>
+avatar - Email,<br>
 
+
+### Модель Сourse: ###
+Модель представляет обучающий курс, и имеет следующие свойства:<br>
+title - Название курса,<br>
+preview - Превью,<br>
+description - Описание курса<br>
+
+### Модель Lesson: ###
+Модель представляет урок, и имеет следующие свойства:<br>
+title - Название урока,<br>
+description - Описание урока<br>
+preview - Превью,<br>
+video_url - Ссылка на видео,<br>
+сourse - Курс,<br>
+
+
+### Контроллер СourseViewSet(ModelViewSet) ###
+Контроллер для CRUD операций по курсам
+
+### Контроллер LessonCreateAPIView(CreateAPIView) ###
+Контроллер для сздания урока
+
+### Контроллер LessonListAPIView(ListAPIView) ###
+Контроллер для просмотра списка уроков
+
+### Контроллер LessonRetrieveAPIView(RetrieveAPIView) ###
+Контроллер для просмотра конкретного урока
+
+### Контроллер LessonUpdateAPIView(UpdateAPIView) ###
+Контроллер для редактирования урока
+
+### Контроллер LessonDestroyAPIView(DestroyAPIView) ###
+Контроллер для удаления урока
 
 
 ## Запуск сервера:
