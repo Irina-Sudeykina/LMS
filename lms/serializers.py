@@ -4,6 +4,11 @@ from lms.models import Lesson, Сourse
 
 
 class СourseSerializer(serializers.ModelSerializer):
+    count_lesson = serializers.SerializerMethodField()
+
+    def get_count_lesson(self, сourse):
+        return Lesson.objects.filter(сourse=сourse).count()
+
     class Meta:
         model = Сourse
         fields = "__all__"
