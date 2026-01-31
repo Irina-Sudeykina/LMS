@@ -1,0 +1,98 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "1234",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-01-25T19:11:39.914Z",
+        "email": "test1@mail.ru",
+        "phone": null,
+        "sity": null,
+        "avatar": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "1234",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-01-25T19:12:42.123Z",
+        "email": "Ivan.Ivanov@mail.ru",
+        "phone": null,
+        "sity": null,
+        "avatar": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+        "password": "1234",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-01-25T19:13:09.243Z",
+        "email": "Petr.Sidorov@mail.ru",
+        "phone": null,
+        "sity": null,
+        "avatar": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.payment",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "date_payment": "2024-10-14",
+        "сourse": 2,
+        "lesson": null,
+        "amount": 150000,
+        "method": "transfer"
+    }
+},
+{
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "date_payment": "2024-07-24",
+        "сourse": 2,
+        "lesson": null,
+        "amount": 150500,
+        "method": "transfer"
+    }
+},
+{
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "date_payment": "2024-07-24",
+        "сourse": null,
+        "lesson": 3,
+        "amount": 15500,
+        "method": "transfer"
+    }
+}
+]
