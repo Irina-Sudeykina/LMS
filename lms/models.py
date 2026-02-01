@@ -1,4 +1,5 @@
 from django.db import models
+
 # from users.models import User
 
 
@@ -16,8 +17,8 @@ class Сourse(models.Model):
         blank=True,
         null=True,
         related_name="owned_courses",
-        verbose_name="Владелец", 
-        help_text="Укажите владельца курса"
+        verbose_name="Владелец",
+        help_text="Укажите владельца курса",
     )
 
     class Meta:
@@ -28,7 +29,7 @@ class Сourse(models.Model):
         ]
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Lesson(models.Model):
@@ -59,8 +60,8 @@ class Lesson(models.Model):
         blank=True,
         null=True,
         related_name="owned_lessons",
-        verbose_name="Владелец", 
-        help_text="Укажите владельца урока"
+        verbose_name="Владелец",
+        help_text="Укажите владельца урока",
     )
 
     class Meta:

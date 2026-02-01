@@ -1,6 +1,6 @@
 from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from lms.models import Lesson, Сourse
 from lms.serializers import LessonSerializer, СourseSerializer
@@ -12,7 +12,7 @@ class СourseViewSet(ModelViewSet):
     queryset = Сourse.objects.all()
 
     def perform_create(self, serializer):
-        course = serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user)
 
     def get_permissions(self):
         if self.action == "create":
@@ -30,7 +30,7 @@ class LessonCreateAPIView(CreateAPIView):
     permission_classes = (~IsModer, IsAuthenticated)
 
     def perform_create(self, serializer):
-        lesson = serializer.save(owner=self.request.user)
+        serializer.save(owner=self.request.user)
 
 
 class LessonListAPIView(ListAPIView):

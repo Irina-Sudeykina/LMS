@@ -1,8 +1,9 @@
 from rest_framework.permissions import BasePermission
 
+
 class IsModer(BasePermission):
     message = "Вы не являетесь модератором."
-    
+
     def has_permission(self, request, view):
         return bool(request.user and request.user.groups.filter(name="moders").exists())
 
