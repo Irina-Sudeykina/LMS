@@ -1,4 +1,5 @@
 from django.db import models
+# from users.models import User
 
 
 class Сourse(models.Model):
@@ -8,6 +9,15 @@ class Сourse(models.Model):
     )
     description = models.TextField(
         blank=True, null=True, verbose_name="Описание курса", help_text="Введите описание курса"
+    )
+    owner = models.ForeignKey(
+        "users.User",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="owned_courses",
+        verbose_name="Владелец", 
+        help_text="Укажите владельца курса"
     )
 
     class Meta:
@@ -42,6 +52,15 @@ class Lesson(models.Model):
         related_name="lessons",
         verbose_name="Курс",
         help_text="Введите курс",
+    )
+    owner = models.ForeignKey(
+        "users.User",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="owned_lessons",
+        verbose_name="Владелец", 
+        help_text="Укажите владельца урока"
     )
 
     class Meta:
