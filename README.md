@@ -52,6 +52,7 @@ method - Способ оплаты<br>
 title - Название курса,<br>
 preview - Превью,<br>
 description - Описание курса<br>
+owner - Владелец курса<br>
 
 ### Модель Lesson: ###
 Модель представляет урок, и имеет следующие свойства:<br>
@@ -60,6 +61,7 @@ description - Описание урока<br>
 preview - Превью,<br>
 video_url - Ссылка на видео,<br>
 сourse - Курс,<br>
+owner - Владелец урока<br>
 
 
 ### Контроллер СourseViewSet(ModelViewSet) ###
