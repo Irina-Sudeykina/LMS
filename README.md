@@ -23,7 +23,28 @@
 email - Аватар,<br>
 phone - Телефон,<br>
 sity - Город<br>
-avatar - Email,<br>
+avatar - Email<br>
+
+### Модель Payment: ###
+Модель представляет платежи пользователя платформы, и имеет следующие свойства:<br>
+user - Пользователь,<br>
+date_payment - Дата оплаты,<br>
+сourse - Курс<br>
+lesson - Урок,<br>
+amount - Сумма оплаты,<br>
+method - Способ оплаты<br>
+
+
+### Контроллер UserViewSet(ModelViewSet) ###
+Контроллер для CRUD операций по пользователям платформы
+
+### Контроллер PaymentFilter(FilterSet) ###
+Контроллер точной фильтрации по способу оплаты.
+Определяем жестко допустимые методы оплаты.
+
+### Контроллер PaymentViewSet(ModelViewSet) ###
+Контроллер для CRUD операций по платежам
+
 
 
 ### Модель Сourse: ###
@@ -31,6 +52,7 @@ avatar - Email,<br>
 title - Название курса,<br>
 preview - Превью,<br>
 description - Описание курса<br>
+owner - Владелец курса<br>
 
 ### Модель Lesson: ###
 Модель представляет урок, и имеет следующие свойства:<br>
@@ -39,6 +61,7 @@ description - Описание урока<br>
 preview - Превью,<br>
 video_url - Ссылка на видео,<br>
 сourse - Курс,<br>
+owner - Владелец урока<br>
 
 
 ### Контроллер СourseViewSet(ModelViewSet) ###
