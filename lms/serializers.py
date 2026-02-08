@@ -22,7 +22,7 @@ class CourseSerializer(serializers.ModelSerializer):
         return course.lessons.count()
 
     def get_is_sub(self, course):
-        """Проверяет, подписан ли текущий пользователь на курс."""
+        """ Проверяет, подписан ли текущий пользователь на курс. """
         user = self.context['request'].user
         return Subscription.objects.filter(user=user, course=course).exists()
 

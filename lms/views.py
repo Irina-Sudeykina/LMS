@@ -4,12 +4,14 @@ from rest_framework.viewsets import ModelViewSet
 
 from lms.models import Lesson, Course
 from lms.serializers import LessonSerializer, CourseSerializer
+from lms.paginators import CastomPaginator
 from users.permissions import IsModer, isOwner
 
 
 class CourseViewSet(ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
+    pagination_class = CastomPaginator
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -36,6 +38,7 @@ class LessonCreateAPIView(CreateAPIView):
 class LessonListAPIView(ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    pagination_class = CastomPaginator
 
 
 class LessonRetrieveAPIView(RetrieveAPIView):
