@@ -3,10 +3,10 @@ from django.db import models
 # from users.models import User
 
 
-class Сourse(models.Model):
+class Course(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название курса", help_text="Введите название курса")
     preview = models.ImageField(
-        upload_to="сourse/image", blank=True, null=True, verbose_name="Превью", help_text="Загрузите превью курса"
+        upload_to="course/image", blank=True, null=True, verbose_name="Превью", help_text="Загрузите превью курса"
     )
     description = models.TextField(
         blank=True, null=True, verbose_name="Описание курса", help_text="Введите описание курса"
@@ -47,9 +47,11 @@ class Lesson(models.Model):
         verbose_name="Ссылка на видео",
         help_text="Введите URL видео (например, YouTube)",
     )
-    сourse = models.ForeignKey(
-        Сourse,
+    course = models.ForeignKey(
+        Course,
         on_delete=models.CASCADE,
+        blank=True,
+        null=True,
         related_name="lessons",
         verbose_name="Курс",
         help_text="Введите курс",
@@ -67,7 +69,7 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = "Урок"
         verbose_name_plural = "Уроки"
-        ordering = ["сourse", "title"]
+        ordering = ["course", "title"]
 
     def __str__(self):
-        return f"{self.сourse}: {self.title}"
+        return f"{self.course}: {self.title}"
