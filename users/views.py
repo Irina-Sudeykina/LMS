@@ -1,7 +1,7 @@
 from django_filters.rest_framework import ChoiceFilter, DjangoFilterBackend, FilterSet
 from django.shortcuts import get_object_or_404
 from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -51,31 +51,20 @@ class PaymentViewSet(ModelViewSet):
 class SubscriptionViewSet(ModelViewSet):
     serializer_class = SubscriptionSerializer
     queryset = Subscription.objects.all()
+    permission_classes = (IsAuthenticated,)
 
-    def perform_create(self, serializer):
-        serializer.save()
-
-    @action(detail=False, methods=["post"])
-    def create_subscription(self, request):
+    # def perform_create(self, serializer):
         # Получаем текущего пользователя
-        user = request.user
-        # Получаем ID курса из тела запроса
-        course_id = request.data.get("course_id")
+        # user = self.request.user
+        # Получаем объект курса из сериализатора
+        # course = serializer.validated_data.get('course')
         
-        # Получаем объект курса из базы данных
-        course_item = get_object_or_404(Course, pk=course_id)
+        # Проверяем наличие существующих подписок
+        # existing_subs = Subscription.objects.filter(user=user, course=course)
         
-        # Проверяем наличие существующих подписок пользователя на этот курс
-        subs_item = Subscription.objects.filter(user=user, course=course_item).first()
-    
-        # Если подписка у пользователя на этот курс есть - удаляем её
-        if subs_item:
-            subs_item.delete()
-            message = 'подписка удалена'
-        # Если подписки у пользователя на этот курс нет - создаём новую подписку
-        else:
-            new_sub = Subscription.objects.create(user=user, course=course_item, is_subscription=True)
-            message = 'подписка добавлена'
-            
-        # Возвращаем ответ в API
-        return Response({"message": message}, status=status.HTTP_200_OK)
+        # if existing_subs.exists():
+            # Если подписки есть, удаляем их все
+            # existing_subs.delete()
+        # else:
+            # Если подписки нет, создаем новую
+            # serializer.save()
