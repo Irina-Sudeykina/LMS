@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from lms.models import Lesson, Сourse
+from lms.models import Lesson, Course
 
 
 class User(AbstractUser):
@@ -41,8 +41,8 @@ class Payment(models.Model):
         help_text="Введите пользователя",
     )
     date_payment = models.DateField(verbose_name="Дата оплаты", help_text="Укажите дату оплаты")
-    сourse = models.ForeignKey(
-        Сourse,
+    course = models.ForeignKey(
+        Course,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -68,3 +68,37 @@ class Payment(models.Model):
         verbose_name="Способ оплаты",
         help_text="Выберите способ оплаты",
     )
+
+    class Meta:
+        verbose_name = "Платеж"
+        verbose_name_plural = "Платежи"
+
+    def __str__(self):
+        return f"{self.date_payment} - {self.user}: {self.amount}"
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="subscriptions",
+        verbose_name="Пользователь",
+        help_text="Введите пользователя",
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="subscriptions",
+        verbose_name="Курс",
+        help_text="Выберите курс",
+    )
+    is_subscription = models.BooleanField(default=True, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+
+    def __str__(self):
+        return f"{self.user}: {self.course} - {self.is_subscription}"

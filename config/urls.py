@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('lms.urls', namespace='lms')),
     path("users/", include("users.urls", namespace="users")),
     path("payments/", include("users.payment_urls", namespace="payments")),  # Путь для платежей
+    path("subscriptions/", include("users.subscription_urls", namespace="subscriptions")),  # Путь для подписок
 ]
 
 if settings.DEBUG:

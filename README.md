@@ -34,6 +34,12 @@ lesson - Урок,<br>
 amount - Сумма оплаты,<br>
 method - Способ оплаты<br>
 
+### Модель Subscription: ###
+Модель представляет подписки пользователя платформы, и имеет следующие свойства:<br>
+user - Пользователь,<br>
+сourse - Курс<br>
+is_subscription - статус подписки<br>
+
 
 ### Контроллер UserViewSet(ModelViewSet) ###
 Контроллер для CRUD операций по пользователям платформы
@@ -44,6 +50,9 @@ method - Способ оплаты<br>
 
 ### Контроллер PaymentViewSet(ModelViewSet) ###
 Контроллер для CRUD операций по платежам
+
+### Контроллер SubscriptionViewSet(ModelViewSet) ###
+Контроллер для операций по подпискам
 
 
 
@@ -89,6 +98,22 @@ owner - Владелец урока<br>
 python manage.py runserver
  ```
 Для остановки нажмите Ctrl + C
+
+
+
+ ## Тестирование:
+Проект покрыт тестами фреймворка DRF. Для их запуска выполните команду:
+```
+python manage.py test
+или
+coverage run --source='.' manage.py test
+```
+Для выгрузки отчета о покрытии проекта тестами выполните команду:
+```
+coverage report
+или
+coverage html
+```
 
 ## Документация:
 

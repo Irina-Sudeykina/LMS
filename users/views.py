@@ -1,10 +1,15 @@
 from django_filters.rest_framework import ChoiceFilter, DjangoFilterBackend, FilterSet
+from django.shortcuts import get_object_or_404
 from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework import status
 
-from users.models import Payment, User
-from users.serializers import PaymentSerializer, UserSerializer
+from users.models import Payment, Subscription, User
+from lms.models import Course
+from users.serializers import PaymentSerializer, SubscriptionSerializer, UserSerializer
 
 
 class UserViewSet(ModelViewSet):
@@ -32,7 +37,7 @@ class PaymentFilter(FilterSet):
 
     class Meta:
         model = Payment
-        fields = ["сourse", "lesson", "method"]
+        fields = ["course", "lesson", "method"]
 
 
 class PaymentViewSet(ModelViewSet):
@@ -41,3 +46,25 @@ class PaymentViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = PaymentFilter  # Применяем кастомный фильтр
     ordering_fields = ("date_payment",)
+
+
+class SubscriptionViewSet(ModelViewSet):
+    serializer_class = SubscriptionSerializer
+    queryset = Subscription.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+    # def perform_create(self, serializer):
+        # Получаем текущего пользователя
+        # user = self.request.user
+        # Получаем объект курса из сериализатора
+        # course = serializer.validated_data.get('course')
+        
+        # Проверяем наличие существующих подписок
+        # existing_subs = Subscription.objects.filter(user=user, course=course)
+        
+        # if existing_subs.exists():
+            # Если подписки есть, удаляем их все
+            # existing_subs.delete()
+        # else:
+            # Если подписки нет, создаем новую
+            # serializer.save()
