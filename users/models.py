@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from lms.models import Lesson, Course
+from lms.models import Course, Lesson
 
 
 class User(AbstractUser):
@@ -67,6 +67,20 @@ class Payment(models.Model):
         editable=False,
         verbose_name="Способ оплаты",
         help_text="Выберите способ оплаты",
+    )
+    session_id = models.CharField(
+        max_length=255,
+        verbose_name="id сессии",
+        blank=True,
+        null=True,
+        help_text="Введите id сессии",
+    )
+    link = models.URLField(
+        max_length=800,
+        verbose_name="Ссылка на оплату",
+        blank=True,
+        null=True,
+        help_text="Введите ссылку на оплату",
     )
 
     class Meta:
