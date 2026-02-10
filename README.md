@@ -20,10 +20,10 @@
 
 ### Модель User: ###
 Модель представляет пользователя платформы, и имеет следующие свойства:<br>
-email - Аватар,<br>
+email - Email,<br>
 phone - Телефон,<br>
 sity - Город<br>
-avatar - Email<br>
+avatar - Аватар<br>
 
 ### Модель Payment: ###
 Модель представляет платежи пользователя платформы, и имеет следующие свойства:<br>
@@ -33,6 +33,8 @@ date_payment - Дата оплаты,<br>
 lesson - Урок,<br>
 amount - Сумма оплаты,<br>
 method - Способ оплаты<br>
+session_id - id сессии<br>
+link - Ссылка на оплату<br>
 
 ### Модель Subscription: ###
 Модель представляет подписки пользователя платформы, и имеет следующие свойства:<br>
@@ -90,6 +92,26 @@ owner - Владелец урока<br>
 
 ### Контроллер LessonDestroyAPIView(DestroyAPIView) ###
 Контроллер для удаления урока
+
+
+## Функции:
+
+### Функция create_stripe_product(title) ###
+Создает продукт в stripe<br>
+Принимает: <br>
+ title - название продукта<br>
+
+### Функция create_stripe_price(product, amount) ###
+Создает цену в stripe<br>
+Принимает: <br>
+ product - продукт<br>
+ amount - цена продукта<br>
+
+### Функция create_stripe_sessions(price) ###
+Создает продукт в stripe<br>
+Принимает: <br>
+ price - цена продукта<br>
+
 
 
 ## Запуск сервера:
