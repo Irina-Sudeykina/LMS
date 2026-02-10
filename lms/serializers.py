@@ -1,16 +1,13 @@
 from rest_framework import serializers
 
-from lms.models import Lesson, Course
-from users.models import Subscription
+from lms.models import Course, Lesson
 from lms.validators import validate_url_source
+from users.models import Subscription
 
 
 class LessonSerializer(serializers.ModelSerializer):
     video_url = serializers.CharField(
-        validators=[validate_url_source], 
-        required=False, 
-        allow_blank=True, 
-        allow_null=True
+        validators=[validate_url_source], required=False, allow_blank=True, allow_null=True
     )
 
     class Meta:
@@ -27,8 +24,8 @@ class CourseSerializer(serializers.ModelSerializer):
         return course.lessons.count()
 
     def get_is_sub(self, course):
-        """ Проверяет, подписан ли текущий пользователь на курс. """
-        user = self.context['request'].user
+        """Проверяет, подписан ли текущий пользователь на курс."""
+        user = self.context["request"].user
         return Subscription.objects.filter(user=user, course=course).exists()
 
     class Meta:

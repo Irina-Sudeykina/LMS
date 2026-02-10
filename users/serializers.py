@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from users.models import Payment, Subscription, User
 from lms.models import Course
+from users.models import Payment, Subscription, User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,18 +15,18 @@ class PaymentSerializer(serializers.ModelSerializer):
         model = Payment
         fields = "__all__"
         extra_kwargs = {
-            'user': {'read_only': True},
+            "user": {"read_only": True},
         }
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     course_id = serializers.IntegerField(write_only=True)
-    
+
     class Meta:
         model = Subscription
-        fields = '__all__'
+        fields = "__all__"
         extra_kwargs = {
-            'user': {'read_only': True},
+            "user": {"read_only": True},
         }
 
     def validate_course_id(self, value):
@@ -38,14 +38,14 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Устанавливаем текущего пользователя
-        validated_data['user'] = self.context['request'].user
+        validated_data["user"] = self.context["request"].user
 
         # Получаем объект курса
-        course = validated_data.pop('course_id')
+        course = validated_data.pop("course_id")
         print("course:", course)
 
         # Получаем текущего пользователя
-        user = self.context['request'].user
+        user = self.context["request"].user
         print("user:", user)
 
         # Проверяем наличие существующих подписок
