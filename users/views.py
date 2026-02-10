@@ -8,8 +8,9 @@ from rest_framework.decorators import action
 from rest_framework import status
 
 from users.models import Payment, Subscription, User
-from lms.models import Course
+from lms.models import Course, Lesson
 from users.serializers import PaymentSerializer, SubscriptionSerializer, UserSerializer
+from users.servises import create_stripe_product, create_stripe_price, create_stripe_sessions
 
 
 class UserViewSet(ModelViewSet):
@@ -46,6 +47,31 @@ class PaymentViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = PaymentFilter  # Применяем кастомный фильтр
     ordering_fields = ("date_payment",)
+    permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        # Передаем текущего пользователя в сериализатор
+        serializer.save(user=self.request.user)
+        payment = serializer.instance
+
+        # Формируем заголовок продукта
+        if payment.course:
+            title = f"Курс: {payment.course.title}"
+        elif payment.lesson:
+            title = f"Лекция: {payment.lesson.title}"
+        else:
+            # Установим дефолтное название, если ничего не выбрано
+            title = "Оплата сервиса"
+
+        # Создание продукта и цены в Stripe
+        product = create_stripe_product(title)
+        price = create_stripe_price(product, payment.amount)
+        session_id, payment_link = create_stripe_sessions(price)
+
+        # Сохраняем ID сессии и ссылку на оплату
+        payment.session_id = session_id
+        payment.link = payment_link
+        payment.save()
 
 
 class SubscriptionViewSet(ModelViewSet):

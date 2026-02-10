@@ -116,6 +116,9 @@ coverage html
 ```
 
 ## Документация:
+http://localhost:8000/swagger/
+или
+http://localhost:8000/redoc/
 
 ## Лицензия:
 Проект распространяется под [лицензией MIT](LICENSE).
