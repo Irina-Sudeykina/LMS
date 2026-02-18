@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.fields import DateTimeField
 
 from lms.models import Course, Lesson
 from lms.validators import validate_url_source
@@ -16,6 +17,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    updated_at = DateTimeField(format="%Y-%m-%d %H:%M:%S")
     count_lesson = serializers.SerializerMethodField()
     is_sub = serializers.SerializerMethodField()
     lessons = LessonSerializer(many=True, read_only=True)
