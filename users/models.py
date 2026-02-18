@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from lms.models import Course, Lesson
+# from lms.models import Course, Lesson
 
 
 class User(AbstractUser):
@@ -42,7 +42,7 @@ class Payment(models.Model):
     )
     date_payment = models.DateField(verbose_name="Дата оплаты", help_text="Укажите дату оплаты")
     course = models.ForeignKey(
-        Course,
+        "lms.Course",
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -51,7 +51,7 @@ class Payment(models.Model):
         help_text="Выберите курс",
     )
     lesson = models.ForeignKey(
-        Lesson,
+        "lms.Lesson",
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -100,7 +100,7 @@ class Subscription(models.Model):
         help_text="Введите пользователя",
     )
     course = models.ForeignKey(
-        Course,
+        "lms.Course",
         on_delete=models.CASCADE,
         blank=True,
         null=True,

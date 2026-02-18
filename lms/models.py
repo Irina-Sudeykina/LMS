@@ -20,6 +20,12 @@ class Course(models.Model):
         verbose_name="Владелец",
         help_text="Укажите владельца курса",
     )
+    updated_at = models.DateTimeField(
+        blank=True,
+        auto_now=True,
+        verbose_name="Дата и время последнего изменения",
+        help_text="Укажите дату и время последнего изменения",
+    )
 
     class Meta:
         verbose_name = "Курс"
